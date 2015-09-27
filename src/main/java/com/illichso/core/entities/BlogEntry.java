@@ -1,12 +1,18 @@
-package com.illichso.entity;
+package com.illichso.core.entities;
 
-public class BlogEntity {
+public class BlogEntry {
+    private Long id;
     private String title;
 
-    public BlogEntity() {
+    public BlogEntry() {
     }
 
-    public BlogEntity(String title) {
+    public BlogEntry(String title) {
+        this.title = title;
+    }
+
+    public BlogEntry(long id, String title) {
+        this.id = id;
         this.title = title;
     }
 
@@ -18,11 +24,19 @@ public class BlogEntity {
         this.title = title;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        BlogEntity that = (BlogEntity) o;
+        BlogEntry that = (BlogEntry) o;
 
         return !(title != null ? !title.equals(that.title) : that.title != null);
 
