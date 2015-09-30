@@ -1,9 +1,9 @@
 package com.illichso.rest.resources.asm;
 
+import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import com.illichso.core.services.util.BlogList;
 import com.illichso.rest.mvc.BlogController;
 import com.illichso.rest.resources.BlogListResource;
-import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 
 public class BlogListResourceAsm extends ResourceAssemblerSupport<BlogList, BlogListResource> {
 
@@ -15,7 +15,7 @@ public class BlogListResourceAsm extends ResourceAssemblerSupport<BlogList, Blog
     @Override
     public BlogListResource toResource(BlogList blogList) {
         BlogListResource res = new BlogListResource();
-        res.setBlogs(new BlogResourceAsm().toResources(blogList.getBlogs()));
+        res.setBlogs(new com.illichso.rest.resources.asm.BlogResourceAsm().toResources(blogList.getBlogs()));
         return res;
     }
 }

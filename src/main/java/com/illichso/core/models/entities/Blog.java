@@ -1,18 +1,20 @@
-package com.illichso.core.entities;
+package com.illichso.core.models.entities;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
+@Entity
 public class Blog {
+    @Id
+    @GeneratedValue
     private Long id;
+
     private String title;
+
+    @OneToOne
     private Account owner;
-
-    public Blog() {
-    }
-
-    public Blog(Long id, String title, Account owner) {
-        this.id = id;
-        this.title = title;
-        this.owner = owner;
-    }
 
     public Long getId() {
         return id;

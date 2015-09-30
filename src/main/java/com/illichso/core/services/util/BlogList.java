@@ -1,12 +1,17 @@
 package com.illichso.core.services.util;
 
-import com.illichso.core.entities.Blog;
+import com.illichso.core.models.entities.Blog;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class BlogList {
-    private List<Blog> blogs = new ArrayList<>();
+
+    private List<Blog> blogs = new ArrayList<Blog>();
+
+    public BlogList(List resultList) {
+        this.blogs = resultList;
+    }
 
     public List<Blog> getBlogs() {
         return blogs;

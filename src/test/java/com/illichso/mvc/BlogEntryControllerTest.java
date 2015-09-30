@@ -1,9 +1,5 @@
-package com.illichso.rest;
+package com.illichso.mvc;
 
-import com.illichso.core.entities.Blog;
-import com.illichso.core.entities.BlogEntry;
-import com.illichso.core.services.BlogEntryService;
-import com.illichso.rest.mvc.BlogEntryController;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -12,19 +8,19 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import com.illichso.core.models.entities.Blog;
+import com.illichso.core.models.entities.BlogEntry;
+import com.illichso.core.services.BlogEntryService;
+import com.illichso.rest.mvc.BlogEntryController;
 
-import static org.hamcrest.CoreMatchers.hasItems;
-import static org.hamcrest.Matchers.endsWith;
-import static org.hamcrest.Matchers.hasItem;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 public class BlogEntryControllerTest {
     @InjectMocks
     private BlogEntryController controller;
@@ -68,7 +64,7 @@ public class BlogEntryControllerTest {
         when(service.findBlogEntry(1L)).thenReturn(null);
 
         mockMvc.perform(get("/rest/blog-entries/1"))
-                .andExpect(status().isNotFound());
+           .andExpect(status().isNotFound());
     }
 
 

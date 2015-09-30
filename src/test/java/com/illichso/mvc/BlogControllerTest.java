@@ -1,8 +1,8 @@
-package com.illichso.rest;
+package com.illichso.mvc;
 
-import com.illichso.core.entities.Account;
-import com.illichso.core.entities.Blog;
-import com.illichso.core.entities.BlogEntry;
+import com.illichso.core.models.entities.Account;
+import com.illichso.core.models.entities.Blog;
+import com.illichso.core.models.entities.BlogEntry;
 import com.illichso.core.services.BlogService;
 import com.illichso.core.services.exceptions.BlogNotFoundException;
 import com.illichso.core.services.util.BlogEntryList;
@@ -20,10 +20,10 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.hamcrest.CoreMatchers.hasItem;
-import static org.hamcrest.CoreMatchers.hasItems;
 import static org.hamcrest.Matchers.endsWith;
-import static org.hamcrest.core.Is.is;
+import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.hasItems;
+import static org.hamcrest.Matchers.is;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.when;
@@ -64,8 +64,7 @@ public class BlogControllerTest {
         blogB.setTitle("Title B");
         list.add(blogB);
 
-        BlogList allBlogs = new BlogList();
-        allBlogs.setBlogs(list);
+        BlogList allBlogs = new BlogList(list);
 
         when(blogService.findAllBlogs()).thenReturn(allBlogs);
 
@@ -91,13 +90,21 @@ public class BlogControllerTest {
                 .andExpect(jsonPath("$.links[*].href",
                         hasItem(endsWith("/blogs/1"))))
                 .andExpect(jsonPath("$.links[*].href",
-                        hasItem(endsWith("/blogs/1/entries"))))
+                        hasItem(endsWith("/blogs/1/blog-entries"))))
                 .andExpect(jsonPath("$.links[*].href",
                         hasItem(endsWith("/accounts/1"))))
                 .andExpect(jsonPath("$.links[*].rel",
                         hasItems(is("self"), is("owner"), is("entries"))))
                 .andExpect(jsonPath("$.title", is("Test Title")))
                 .andExpect(status().isOk());
+    }
+
+    @Test
+    public void getNonExistingBlog() throws Exception {
+        when(blogService.findBlog(1L)).thenReturn(null);
+
+        mockMvc.perform(get("/rest/blogs/1"))
+                .andExpect(status().isNotFound());
     }
 
     @Test
@@ -146,9 +153,7 @@ public class BlogControllerTest {
         blogListings.add(entryA);
         blogListings.add(entryB);
 
-        BlogEntryList list = new BlogEntryList();
-        list.setEntries(blogListings);
-        list.setBlogId(1L);
+        BlogEntryList list = new BlogEntryList(1L, blogListings);
 
         when(blogService.findAllBlogEntries(1L)).thenReturn(list);
 

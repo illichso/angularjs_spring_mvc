@@ -1,12 +1,12 @@
 package com.illichso.rest.resources.asm;
 
-import com.illichso.core.entities.Blog;
+import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
+import com.illichso.core.models.entities.Blog;
 import com.illichso.rest.mvc.AccountController;
 import com.illichso.rest.mvc.BlogController;
 import com.illichso.rest.resources.BlogResource;
-import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
 
 public class BlogResourceAsm extends ResourceAssemblerSupport<Blog, BlogResource> {
     public BlogResourceAsm() {
@@ -18,7 +18,7 @@ public class BlogResourceAsm extends ResourceAssemblerSupport<Blog, BlogResource
         BlogResource resource = new BlogResource();
         resource.setTitle(blog.getTitle());
         resource.add(linkTo(BlogController.class).slash(blog.getId()).withSelfRel());
-        resource.add(linkTo(BlogController.class).slash(blog.getId()).slash("entries").withRel("entries"));
+        resource.add(linkTo(BlogController.class).slash(blog.getId()).slash("blog-entries").withRel("entries"));
         if(blog.getOwner() != null)
             resource.add(linkTo(AccountController.class).slash(blog.getOwner().getId()).withRel("owner"));
         return resource;

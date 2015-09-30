@@ -2,8 +2,8 @@ package com.illichso.rest.resources;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.illichso.core.entities.Account;
 import org.springframework.hateoas.ResourceSupport;
+import com.illichso.core.models.entities.Account;
 
 public class AccountResource extends ResourceSupport {
     private String name;
@@ -17,10 +17,12 @@ public class AccountResource extends ResourceSupport {
     public void setName(String name) {
         this.name = name;
     }
+
     @JsonIgnore
     public String getPassword() {
         return password;
     }
+
     @JsonProperty
     public void setPassword(String password) {
         this.password = password;

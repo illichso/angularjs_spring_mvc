@@ -1,10 +1,10 @@
 package com.illichso.rest.resources.asm;
 
+import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import com.illichso.core.services.util.BlogEntryList;
 import com.illichso.rest.mvc.BlogController;
 import com.illichso.rest.resources.BlogEntryListResource;
 import com.illichso.rest.resources.BlogEntryResource;
-import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 
 import java.util.List;
 

@@ -1,4 +1,5 @@
 package com.illichso.core.services.exceptions;
+
 public class BlogExistsException extends RuntimeException {
     public BlogExistsException() {
     }

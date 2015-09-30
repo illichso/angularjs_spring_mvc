@@ -1,17 +1,12 @@
 package com.illichso.rest.resources;
 
-import com.illichso.core.entities.BlogEntry;
 import org.springframework.hateoas.ResourceSupport;
+import com.illichso.core.models.entities.BlogEntry;
 
 public class BlogEntryResource extends ResourceSupport {
     private String title;
 
-    public BlogEntryResource() {
-    }
-
-    public BlogEntryResource(String title) {
-        this.title = title;
-    }
+    private String content;
 
     public String getTitle() {
         return title;
@@ -21,10 +16,18 @@ public class BlogEntryResource extends ResourceSupport {
         this.title = title;
     }
 
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
     public BlogEntry toBlogEntry() {
         BlogEntry entry = new BlogEntry();
         entry.setTitle(title);
+        entry.setContent(content);
         return entry;
     }
 }
-

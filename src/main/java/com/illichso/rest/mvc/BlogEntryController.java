@@ -1,22 +1,21 @@
 package com.illichso.rest.mvc;
 
-import com.illichso.core.entities.BlogEntry;
-import com.illichso.core.services.BlogEntryService;
-import com.illichso.rest.resources.BlogEntryResource;
-import com.illichso.rest.resources.asm.BlogEntryResourceAsm;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+import com.illichso.core.models.entities.BlogEntry;
+import com.illichso.core.services.BlogEntryService;
+import com.illichso.rest.resources.BlogEntryResource;
+import com.illichso.rest.resources.asm.BlogEntryResourceAsm;
 
 @Controller
 @RequestMapping("/rest/blog-entries")
 public class BlogEntryController {
     private BlogEntryService service;
 
+    @Autowired
     public BlogEntryController(BlogEntryService service)
     {
         this.service = service;
@@ -30,9 +29,9 @@ public class BlogEntryController {
         if(entry != null)
         {
             BlogEntryResource res = new BlogEntryResourceAsm().toResource(entry);
-            return new ResponseEntity<BlogEntryResource>(res, HttpStatus.OK);
+            return new ResponseEntity<>(res, HttpStatus.OK);
         } else {
-            return new ResponseEntity<BlogEntryResource>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -44,9 +43,9 @@ public class BlogEntryController {
         if(entry != null)
         {
             BlogEntryResource res = new BlogEntryResourceAsm().toResource(entry);
-            return new ResponseEntity<BlogEntryResource>(res, HttpStatus.OK);
+            return new ResponseEntity<>(res, HttpStatus.OK);
         } else {
-            return new ResponseEntity<BlogEntryResource>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -58,9 +57,9 @@ public class BlogEntryController {
         if(updatedEntry != null)
         {
             BlogEntryResource res = new BlogEntryResourceAsm().toResource(updatedEntry);
-            return new ResponseEntity<BlogEntryResource>(res, HttpStatus.OK);
+            return new ResponseEntity<>(res, HttpStatus.OK);
         } else {
-            return new ResponseEntity<BlogEntryResource>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 }

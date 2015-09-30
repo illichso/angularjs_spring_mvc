@@ -1,7 +1,7 @@
 package com.illichso.rest.resources;
 
-import com.illichso.core.entities.Blog;
 import org.springframework.hateoas.ResourceSupport;
+import com.illichso.core.models.entities.Blog;
 
 public class BlogResource extends ResourceSupport {
 
