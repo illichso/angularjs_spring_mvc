@@ -13,8 +13,9 @@
  * specified, as shown below.
  */
 angular.module( 'ngBoilerplate.home', [
-  'ui.router',
-  'plusOne'
+    'ui.router',
+    'plusOne',
+    'ngBoilerplate.account'
 ])
 
 /**
@@ -22,24 +23,26 @@ angular.module( 'ngBoilerplate.home', [
  * will handle ensuring they are all available at run-time, but splitting it
  * this way makes each module more "self-contained".
  */
-.config(function config( $stateProvider ) {
-  $stateProvider.state( 'home', {
-    url: '/home',
-    views: {
-      "main": {
-        controller: 'HomeCtrl',
-        templateUrl: 'home/home.tpl.html'
-      }
-    },
-    data:{ pageTitle: 'Home' }
-  });
-})
+    .config(function config( $stateProvider ) {
+        $stateProvider.state( 'home', {
+            url: '/home',
+            views: {
+                "main": {
+                    controller: 'HomeCtrl',
+                    templateUrl: 'home/home.tpl.html'
+                }
+            },
+            data:{ pageTitle: 'Home' }
+        });
+    })
 
 /**
  * And of course we define a controller for our route.
  */
-.controller( 'HomeCtrl', function HomeController( $scope ) {
-})
+    .controller( 'HomeCtrl', function HomeController( $scope, sessionService ) {
+        $scope.isLoggedIn = sessionService.isLoggedIn;
+        $scope.logout = sessionService.logout;
+    })
 
 ;
 
